@@ -80,11 +80,16 @@ finalScore(inning, 9) might return:
 
 */ 
 
-function finalScore(/*code Here*/){
-
-  /*Code Here*/
-
+function finalScore(numInnings, inningFunction){
+  let homeTeam = 0;
+  let awayTeam = 0;
+  for (let i = 0; i < numInnings; i++){
+    homeTeam = homeTeam + inning();
+    awayTeam = awayTeam + inning();
+  }
+  return {"Home": homeTeam, "Away": awayTeam};
 }
+console.log("Task 3", finalScore(10, inning()));
 
 /* Task 4: 
 
@@ -107,8 +112,17 @@ and returns the score at each pont in the game, like so:
 
 Final Score: 6 - 10 */
 
-function scoreboard(/* CODE HERE */) {
-  /* CODE HERE */
+function scoreboard(numInnings, inningScoreFunction, inningFunction) {
+  const results = [];
+  const final = {"Home": 0, "Away": 0};
+  for (let i = 0; i < numInnings; i++){
+    const obj = Object.assign({ "inning": i + 1}, inningScoreFunction(1, inningFunction));
+    results.push('Inning ${obj.inning}: ${final.Home} - ${final.Away}');
+    final["Home"] += obj.Home;
+    final["Away"] += obj.Away;
+  }
+  results.push('Final Score: ${final.Home} - ${final.Away}');
+  return results;
 }
 
 
